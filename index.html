@@ -63,8 +63,8 @@
     <link rel="stylesheet" href="assets/vendors/polyglot-language-switcher/polyglot-language-switcher.css" />
 
     <!-- template styles -->
-    <link rel="stylesheet" href="assets/css/woodza.css" />
-    <link rel="stylesheet" href="assets/css/woodza-responsive.css" />
+    <link rel="stylesheet" href="assets/css/danafloors.css" />
+    <link rel="stylesheet" href="assets/css/danafloors-responsive.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 </head>
@@ -120,8 +120,11 @@
                                 <li>
                                     <a href="index.html#services">Services</a>
                                 </li>
-                                <li>
+                                <li class="dropdown">
                                     <a href="index.html#gallery-front">Gallery</a>
+                                    <ul>
+                                        <li><a href="gallery.html">Full Gallery</a></li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="index.html#our-partners">Partners</a>
@@ -296,7 +299,7 @@
                 </div>
                 <div class="row">
                     <!--Services Two Single Start-->
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="100ms">
+                    <div class="col-xl-3 col-lg-3 wow fadeInUp" data-wow-delay="100ms">
                         <div class="services-two__single">
                             <div class="services-two__img">
                                 <img src="assets/images/services/service-image.png" alt="">
@@ -309,7 +312,7 @@
                     </div>
                     <!--Services Two Single End-->
                     <!--Services Two Single Start-->
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="200ms">
+                    <div class="col-xl-3 col-lg-3 wow fadeInUp" data-wow-delay="200ms">
                         <div class="services-two__single">
                             <div class="services-two__img">
                                 <img src="assets/images/services/service-image.png" alt="">
@@ -322,13 +325,26 @@
                     </div>
                     <!--Services Two Single End-->
                     <!--Services Two Single Start-->
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="300ms">
+                    <div class="col-xl-3 col-lg-3 wow fadeInUp" data-wow-delay="300ms">
                         <div class="services-two__single">
                             <div class="services-two__img">
                                 <img src="assets/images/services/service-image.png" alt="">
                             </div>
                             <div class="services-two__content">
                                 <h3 class="services-two__title"><a href="#">Installation</a></h3>
+                                <p class="services-two__text-2">One sentence service description.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Services Two Single End-->
+                    <!--Services Two Single Start-->
+                    <div class="col-xl-3 col-lg-3 wow fadeInUp" data-wow-delay="400ms">
+                        <div class="services-two__single">
+                            <div class="services-two__img">
+                                <img src="assets/images/services/service-image.png" alt="">
+                            </div>
+                            <div class="services-two__content">
+                                <h3 class="services-two__title"><a href="#">Custom Design</a></h3>
                                 <p class="services-two__text-2">One sentence service description.</p>
                             </div>
                         </div>
@@ -361,10 +377,14 @@
 <section class="flickr-gallery-section">
   <div class="container">
 
-    <div id="flickr-gallery" class="flickr-gallery-grid" aria-live="polite"></div>
+    <div id="flickr-gallery" class="flickr-gallery-grid" data-limit="6" aria-live="polite"></div>
 
     <div id="flickr-gallery-status" class="flickr-gallery-status" role="status">
       Loading gallery…
+    </div>
+
+    <div class="flickr-gallery-more" style="text-align: center; margin-top: 40px;">
+      <a href="gallery.html" class="thm-btn">View Full Gallery</a>
     </div>
   </div>
 </section>
@@ -706,7 +726,7 @@
 
 
     <!-- template js -->
-    <script src="assets/js/woodza.js"></script>
+    <script src="assets/js/danafloors.js?v=2"></script>
 </body>
 
 </html>
