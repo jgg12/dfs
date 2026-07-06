@@ -5971,6 +5971,14 @@ ul {
   background: #000;
 }
 
+.video-gallery-title {
+  margin: 16px 0 0;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--woodza-black);
+  text-align: center;
+}
+
 .video-gallery-item img {
   display: block;
   width: 100%;
