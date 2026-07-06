@@ -7855,6 +7855,7 @@ ul {
   z-index: 15;
 }
 
+.page-header__inner h1,
 .page-header__inner h2 {
   font-size: 70px;
   color: var(--woodza-white);
