@@ -1671,8 +1671,24 @@
     }
 
     .main-menu-two .mobile-nav__toggler {
-        padding: 46px 0;
-        display: inline-block;
+        /* 48x48 centred hit area. The old `padding: 46px 0` gave the icon no
+           horizontal box at all, so it sat flush against the left edge of its
+           own tap target with 30px of dead space to the right of it.
+           Vertical margin preserves the original 124px footprint (38+48+38),
+           so the header height and alignment are unchanged. */
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        margin: 38px 0;
     }
 
     .main-menu-two__wrapper {
@@ -1735,4 +1751,227 @@
 
 
 
+}
+
+/*--------------------------------------------------------------
+# Mobile optimisation (added 2026-09-11)
+# Scoped to phone/tablet widths only — desktop layout is untouched.
+--------------------------------------------------------------*/
+
+/* ---------- Phones ---------- */
+@media only screen and (max-width: 767px) {
+
+    /* Tighten the vertical rhythm: the stock template keeps desktop-sized
+       section padding on phones, which is what makes the page so long. */
+    .services-two {
+        padding-top: 55px;
+        padding-bottom: 55px;
+    }
+
+    .problem-solved-two {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    /* The 30px right margin is there to open a gap beside the text column on
+       desktop. Stacked on a phone it just pushes the image off-centre. */
+    .problem-solved-two__left {
+        margin-right: 0;
+    }
+
+    .faq-page {
+        padding-top: 55px;
+        padding-bottom: 55px;
+    }
+
+    .project-details {
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+
+    /* Headings: 45px is oversized on a 375px screen */
+    .main-slider-two__title {
+        font-size: 34px;
+        line-height: 42px;
+    }
+
+    .main-slider-two__sub-title {
+        font-size: 15px;
+        line-height: 24px;
+    }
+
+    .section-title-two__title {
+        font-size: 30px;
+        line-height: 38px;
+    }
+
+    /* Service cards: cap the image and cut the decorative top padding so a
+       card is ~380px instead of ~630px. */
+    .services-two__single {
+        margin-bottom: 22px;
+    }
+
+    .services-two__img img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .services-two__content {
+        padding: 26px 22px 26px;
+    }
+
+    .services-two__title {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    /* Partner logos are small tiles — two per row reads better and halves
+       the section height. (.partner-col is set on those columns in the HTML.) */
+    .services-two .row > .partner-col {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .partner-col .services-two__single {
+        margin-bottom: 16px;
+    }
+
+    /* Logos must never be cropped — override the cover rule used for photos. */
+    .partner-col .services-two__img img {
+        height: auto;
+        max-height: 190px;
+        object-fit: contain;
+    }
+
+    /* Bigger hit areas. The hamburger was an 18px-wide target. */
+    .mobile-nav__toggler {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .mobile-nav__container .main-menu__list .dropdown > a button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .mobile-nav__close {
+        min-width: 44px;
+        min-height: 44px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+
+    /* Footer links sit at 17px tall; give them a real touch row. */
+    .footer-widget__link-list li a,
+    .footer-widget__service-list li a {
+        display: inline-block;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+    .site-footer__bottom-inner {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+    /* Phone and email are the two most important taps on the contact page —
+       give them a full 44px row. */
+    .contact-page__list li .content p a {
+        display: inline-block;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    /* Service card titles link to the quote page; 22px was too short. */
+    .services-two__title a {
+        display: inline-block;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* Header logo and breadcrumb links. */
+    .main-menu-two__logo a {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        min-height: 46px;
+    }
+
+    .thm-breadcrumb li a,
+    .site-footer__bottom-text a {
+        display: inline-block;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    /* The PSU quote form is a fixed 1200px iframe; give it room without a
+       second scrollbar trap. */
+    .quote-embed iframe,
+    iframe[src*="sites.psu.edu"] {
+        width: 100%;
+        min-height: 1400px;
+    }
+
+    /* Map is 600px of dead height on a phone. */
+    .google-map__one {
+        height: 320px;
+    }
+}
+
+/* ---------- Small tablets / large phones ---------- */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    .services-two .row > [class*="col-"] {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .services-two__img img {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .partner-col .services-two__img img {
+        height: auto;
+        max-height: 210px;
+        object-fit: contain;
+    }
+
+    .services-two__content {
+        padding: 30px 24px 28px;
+    }
+
+    .main-slider-two__title {
+        font-size: 44px;
+        line-height: 54px;
+    }
 }

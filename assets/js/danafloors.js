@@ -126,7 +126,7 @@ function thmOwlInit() {
     $(".thm-owl__carousel").each(function () {
       let elm = $(this);
       let options = elm.data('owl-options');
-      let thmOwlCarousel = elm.owlCarousel(options);
+      if ($.fn.owlCarousel) { elm.owlCarousel(options); }
     });
   }
 
@@ -217,24 +217,29 @@ function thmOwlInit() {
   }
 
   if ($("#datepicker").length) {
-    $("#datepicker").datepicker();
+    if ($.fn.datepicker) { $("#datepicker").datepicker(); }
   }
 
   if ($("#datepicker2").length) {
-    $("#datepicker2").datepicker();
+    if ($.fn.datepicker) { $("#datepicker2").datepicker(); }
   }
 
   if ($("#datepicker-inline").length) {
-    $("#datepicker-inline").datepicker();
+    if ($.fn.datepicker) { $("#datepicker-inline").datepicker(); }
   }
 
-  $('input[name="time"]').ptTimeSelect();
+  // Guarded: this ran unconditionally, so if the timepicker vendor script
+  // failed to load it threw here and every binding below it — including the
+  // mobile nav toggler — never ran.
+  if ($('input[name="time"]').length && $.fn.ptTimeSelect) {
+    $('input[name="time"]').ptTimeSelect();
+  }
 
   if ($(".banner-bg-slide").length) {
     $(".banner-bg-slide").each(function () {
       var Self = $(this);
       var bgSlideOptions = Self.data("options");
-      var bannerTwoSlides = Self.vegas(bgSlideOptions);
+      if ($.fn.vegas) { Self.vegas(bgSlideOptions); }
     });
   }
 
@@ -365,6 +370,7 @@ function thmOwlInit() {
             $(form).parent().find(".result").append(response);
             $(form).find('input[type="text"]').val("");
             $(form).find('input[type="email"]').val("");
+            $(form).find('input[type="tel"]').val("");
             $(form).find("textarea").val("");
           }
         );
@@ -666,7 +672,7 @@ function thmOwlInit() {
     const tinyElm = document.querySelectorAll(".thm-tiny__slider");
     tinyElm.forEach(function (tinyElm) {
       const tinyOptions = JSON.parse(tinyElm.dataset.tinyOptions);
-      let thmTinySlider = tns(tinyOptions);
+      if (typeof tns === "function") { tns(tinyOptions); }
     });
   }
 
