@@ -11207,3 +11207,21 @@ ul {
     transform: rotate(180deg);
   }
 }
+
+/*--------------------------------------------------------------
+# Hero slider: equal-height slides
+# The eyebrow line wraps to two lines on one slide below 992px, which
+# made that slide taller than the others. The swiper container sizes to
+# the tallest slide, so a shorter active slide left a strip at the bottom
+# showing the neighbouring slide's background. Stretching the slides to a
+# common height removes the gap.
+--------------------------------------------------------------*/
+.main-slider-two .swiper-wrapper {
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.main-slider-two .swiper-slide {
+  height: auto;
+}
