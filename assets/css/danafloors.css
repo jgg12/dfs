@@ -11225,3 +11225,47 @@ ul {
 .main-slider-two .swiper-slide {
   height: auto;
 }
+
+/* Contact form: honeypot + submission feedback */
+.dfs-hp {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+.form-message {
+  margin: 0;
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.form-message--success {
+  background-color: #eaf6ec;
+  border-left: 4px solid #2e7d32;
+  color: #1b4d20;
+}
+
+.form-message--error {
+  background-color: #fdeceb;
+  border-left: 4px solid #c62828;
+  color: #7f1d1d;
+}
+
+.form-message a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.contact-page__btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

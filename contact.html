@@ -273,7 +273,12 @@
                         <div class="contact-page__right">
                             <h3 class="contact-page__right-title">Send a message</h3>
                             <p class="contact-page__right-text"></p>
-                            <form action="assets/inc/sendemail.php" class="contact-page__form contact-form-validated" novalidate="novalidate">
+                            <form class="contact-page__form contact-form-validated" novalidate="novalidate">
+                                <!-- Honeypot: hidden from people, irresistible to bots. Leave it empty. -->
+                                <div class="dfs-hp" aria-hidden="true">
+                                    <label for="dfs-website">Website</label>
+                                    <input type="text" id="dfs-website" name="website" tabindex="-1" autocomplete="off">
+                                </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6">
                                         <div class="contact-page__input-box">
@@ -307,6 +312,7 @@
                                     </div>
                                 </div>
                             </form>
+                            <div class="result" role="status" aria-live="polite"></div>
                         </div>
                     </div>
                 </div>

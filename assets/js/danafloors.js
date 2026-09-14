@@ -354,6 +354,32 @@ function thmOwlInit() {
     });
   }
 
+  /* ------------------------------------------------------------------
+   * Contact form -> Google Forms
+   *
+   * TO FINISH SETUP: open the Google Form, use the three-dot menu ->
+   * "Get pre-filled link", fill each box with that field's own name, click
+   * "Get link" -> "Copy link", and read the values off that URL:
+   *
+   *   https://docs.google.com/forms/d/e/FORM_ID/viewform?entry.111=Name&entry.222=Email...
+   *                                     ^^^^^^^           ^^^^^^^^^
+   *
+   * Put FORM_ID in `action` (note: /formResponse, not /viewform) and each
+   * entry.NNN number beside the matching field below. The keys on the left
+   * are the `name` attributes in contact.html - do not rename them.
+   * ------------------------------------------------------------------ */
+  var GOOGLE_FORM = {
+    action:
+      "https://docs.google.com/forms/d/e/1FAIpQLSfkAnBOfGWcr-zSjZw3GND_gV8-gLjBm0E_DueNfIcQPBKNPg/formResponse",
+    fields: {
+      name: "entry.1307388615",
+      email: "entry.1822158368",
+      Phone: "entry.950346783",
+      subject: "entry.842321335",
+      message: "entry.218218977"
+    }
+  };
+
   if ($(".contact-form-validated").length) {
     $(".contact-form-validated").validate({
       rules: {
@@ -363,17 +389,68 @@ function thmOwlInit() {
         subject: { required: true }
       },
       submitHandler: function (form) {
-        $.post(
-          $(form).attr("action"),
-          $(form).serialize(),
-          function (response) {
-            $(form).parent().find(".result").append(response);
-            $(form).find('input[type="text"]').val("");
-            $(form).find('input[type="email"]').val("");
-            $(form).find('input[type="tel"]').val("");
-            $(form).find("textarea").val("");
-          }
-        );
+        var $form = $(form);
+        var $result = $form.parent().find(".result");
+        var $btn = $form.find('button[type="submit"]');
+        var originalLabel = $btn.text();
+
+        function message(type, html) {
+          $result.html(
+            '<p class="form-message form-message--' + type + '">' + html + "</p>"
+          );
+        }
+
+        // Honeypot: a real person never fills this in.
+        if ($.trim($form.find('input[name="website"]').val()) !== "") {
+          return false;
+        }
+
+        if (!GOOGLE_FORM.action) {
+          message(
+            "error",
+            'This form isn\'t finished being set up. Please call ' +
+              '<a href="tel:814-461-9971">814-461-9971</a> instead.'
+          );
+          return false;
+        }
+
+        var payload = new URLSearchParams();
+        $.each(GOOGLE_FORM.fields, function (fieldName, entryId) {
+          if (!entryId) return;
+          payload.append(
+            entryId,
+            $.trim($form.find('[name="' + fieldName + '"]').val() || "")
+          );
+        });
+
+        $btn.prop("disabled", true).text("Sending...");
+        $result.empty();
+
+        fetch(GOOGLE_FORM.action, {
+          method: "POST",
+          mode: "no-cors",
+          body: payload
+        })
+          .then(function () {
+            message(
+              "success",
+              "Thanks - your message has been sent. We'll get back to you shortly."
+            );
+            form.reset();
+            $form.validate().resetForm();
+          })
+          .catch(function () {
+            message(
+              "error",
+              'Sorry, your message could not be sent. Please call ' +
+                '<a href="tel:814-461-9971">814-461-9971</a> or email ' +
+                '<a href="mailto:contactus@danafloorsanding.com">contactus@danafloorsanding.com</a>.'
+            );
+          })
+          .then(function () {
+            $btn.prop("disabled", false).text(originalLabel);
+          });
+
         return false;
       }
     });
