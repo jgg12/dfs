@@ -274,10 +274,14 @@
                             <h3 class="contact-page__right-title">Send a message</h3>
                             <p class="contact-page__right-text"></p>
                             <form class="contact-page__form contact-form-validated" novalidate="novalidate">
-                                <!-- Honeypot: hidden from people, irresistible to bots. Leave it empty. -->
-                                <div class="dfs-hp" aria-hidden="true">
+                                <!-- Honeypot: hidden from people, irresistible to bots. Leave it empty.
+                                     The hiding is inlined ON PURPOSE. If it lived only in
+                                     danafloors.css, a stale or failed stylesheet would expose this
+                                     field, and anything a real visitor typed into it would be
+                                     silently discarded. Do not move these styles out. -->
+                                <div class="dfs-hp" aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
                                     <label for="dfs-website">Website</label>
-                                    <input type="text" id="dfs-website" name="website" tabindex="-1" autocomplete="off">
+                                    <input type="text" id="dfs-website" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;">
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6">
